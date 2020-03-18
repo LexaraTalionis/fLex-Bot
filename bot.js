@@ -57,6 +57,11 @@ client.on("message", message => {
 				message.author.send("I can't seem to find "+name+" on "+realm+". Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			}
 		}
+	} else if (!message.author.bot) {
+		if (message.content.startsWith("!new")) {
+			newUsers[user.id] = {};
+			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
+		}
 	}
 });
 
