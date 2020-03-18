@@ -13,7 +13,7 @@ client.on('message', message => {
 	var name = info[0];
 	var realm = info[1];
 	var realmDash = realm.replace(" ", "-");
-	var url = wow+realm+"/"+name;
+	var url = wow+realmDash+"/"+name;
 	
 	https.get(url, (result) => {
 		if (result.statusCode !== 200) {
