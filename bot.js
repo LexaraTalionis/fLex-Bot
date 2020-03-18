@@ -9,6 +9,10 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
+	if (message.author.bot) {
+		return;
+	}
+	
 	var info = message.content.split("-");
 	var name = info[0];
 	console.log("Name: "+name);
