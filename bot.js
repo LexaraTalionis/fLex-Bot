@@ -11,9 +11,12 @@ client.on('ready', () => {
 client.on('message', message => {
 	var info = message.content.split("-");
 	var name = info[0];
+	console.log("Name: "+name);
 	var realm = info[1];
+	console.log("Realm: "+realm);
 	var realmDash = realm.replace(" ", "-");
 	var url = wow+realmDash+"/"+name;
+	console.log("URL: "+url);
 	
 	https.get(url, (result) => {
 		if (result.statusCode !== 200) {
