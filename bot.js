@@ -35,7 +35,7 @@ client.on("message", message => {
 	if (message.channel.type == "dm") {
 		var info = newUsers[message.author.id];
 		
-		if (name in info && realm in info) {
+		if (typeof info.name == 'string' && typeof info.realm == 'string') {
 			if (message.content.startsWith("Yes")) {
 				
 			} else if (message.content.startsWith("No")) {
