@@ -59,7 +59,7 @@ client.on("message", message => {
 		}
 	} else if (!message.author.bot) {
 		if (message.content.startsWith("!new")) {
-			newUsers[user.id] = {};
+			newUsers[message.author.id] = {};
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 		}
 	}
