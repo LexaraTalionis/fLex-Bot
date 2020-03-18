@@ -32,15 +32,15 @@ client.on("guildMemberAdd", user => {
 });
 
 client.on("message", message => {
+	var userID = message.author.id;
+	
 	if (message.channel.type == "dm") {
-		var info = newUsers[message.author.id];
-		
-		if (typeof info.name == 'string' && typeof info.realm == 'string') {
+		if (typeof newUsers[userID].name == 'string' && typeof newUsers[userID].realm == 'string') {
 			if (message.content.startsWith("Yes")) {
 				
 			} else if (message.content.startsWith("No")) {
-				delete info.name;
-				delete info.realm;
+				delete newUsers[userID].name;
+				delete newUsers[userID].realm;
 				
 				message.author.send("Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			} else {
@@ -50,8 +50,8 @@ client.on("message", message => {
 			var name, realm, url = parseName(message.content);
 			
 			if (typeof url === "string") {
-				info.name = name;
-				info.realm = realm;
+				newUsers[userID].name = name;
+				newUsers[userID].realm = realm;
 				message.author.send(url+"\nIs this your character? Type Yes or No.");
 			} else {
 				message.author.send("I can't seem to find "+name+" on "+realm+". Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
@@ -59,7 +59,7 @@ client.on("message", message => {
 		}
 	} else if (!message.author.bot) {
 		if (message.content.startsWith("!new")) {
-			newUsers[message.author.id] = {};
+			newUsers[userID] = {};
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 		}
 	}
