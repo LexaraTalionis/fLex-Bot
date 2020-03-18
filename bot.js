@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const https = require("https");
 
 const wow = "https://worldofwarcraft.com/en-us/character/us/";
+
 function parseName(str) {
 	var info = str.split("-");
 	var name = info[0];
@@ -18,9 +19,9 @@ function parseName(str) {
 	});
 }
 
-const newUsers = {};
-
 const client = new Discord.Client();
+
+var newUsers = {};
 
 client.on("ready", () => {
     console.log("Logged in as "+client.user.tag+"!");
