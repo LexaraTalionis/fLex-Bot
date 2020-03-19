@@ -40,10 +40,9 @@ client.on("message", message => {
 	}
 	
 	var userID = message.author.id;
-	console.log("User ID: "+userID+" ("+(typeof userID)+")");
-	/*
+	
 	if (message.channel.type == "dm") {
-		if (typeof newUsers.get(userID).get(name) == 'string' && typeof newUsers.get(userID).get(realm) == 'string') {
+		/*if (typeof newUsers.get(userID).get(name) == 'string' && typeof newUsers.get(userID).get(realm) == 'string') {
 			if (message.content.startsWith("Yes")) {
 				
 			} else if (message.content.startsWith("No")) {
@@ -54,9 +53,10 @@ client.on("message", message => {
 			} else {
 				message.author.send("I'm sorry, I don't understand. Is that your character? Type Yes or No.");
 			}
-		} else {
+		} else {*/
 			var name, realm, url = parseName(message.content);
-			
+			console.log(name, realm, url);
+			/*
 			if (typeof url === "string") {
 				newUsers.get(userID).set("name", name);
 				newUsers.get(userID).set("realm", realm);
