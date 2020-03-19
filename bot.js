@@ -7,9 +7,6 @@ const client = new Discord.Client();
 function parseName(str) {
 	var clean = str.trim().toLowerCase();
 	var words = clean.match(/[a-z]+/g);
-	
-	console.log(clean, words);
-	
 	var name = words[0];
 	words.shift();
 	var realm = words.join(" ");
@@ -46,11 +43,12 @@ client.on("message", message => {
 		newUsers.set(userID, new Map());
 		message.channel.send("Welcome to the Lex Raid Discord <@"+userID+">! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 	} else {
-		var info = newUsers.get(userID);
+		var name = newUsers.get(userID).get("name");
+		var realm = newUsers.get(userID).get("realm");
 		
-		if (info.has("name") && info.has("realm")) {
+		if (typeof name === "string" && typeof realm === "string") {
 			if (message.content.startsWith("Yes")) {
-				message.member.setNickname(info.get("name")+"-"+info.get("realm")).catch(e=>console.log("Set Nickname: "+e));
+				message.member.setNickname(name+"-"+realm).catch(e=>console.log("Set Nickname: "+e));
 				message.member.roles.set(["First Raid"]).catch(e=>console.log("Set Roles: "+e));
 				message.channel.send("You're all set up, <@"+userID+">!");
 			} else if (message.content.startsWith("No")) {
@@ -62,7 +60,9 @@ client.on("message", message => {
 				message.channel.send("I'm sorry, <@"+userID+">, I don't understand. Is that your character?\nType __**Yes**__ or __**No**__.");
 			}
 		} else {
-			var name, realm, url = parseName(message.content);
+			var url;
+			
+			name, realm, url = parseName(message.content).catch(e=>console.log("Parse Name: "+e));;
 			
 			https.get(url, (result) => {
 				if (result.statusCode !== 200) {
