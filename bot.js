@@ -30,8 +30,8 @@ client.on("message", message => {
 		
 		if (info.has("name") && info.has("realm")) {
 			if (message.content.startsWith("Yes")) {
-				message.member.setNickname(info.get("name")+"-"+info.get("realm")).catch(e=>console.log(e));
-				message.member.roles.set(["First Raid"]).catch(e=>console.log(e));
+				message.member.setNickname(info.get("name")+"-"+info.get("realm")).catch(e=>console.log("Set Nickname: "+e));
+				message.member.roles.set(["First Raid"]).catch(e=>console.log("Set Roles: "+e));
 				message.channel.send("You're all set up, <@"+userID+">!");
 			} else if (message.content.startsWith("No")) {
 				newUsers.get(userID).delete("name");
@@ -50,13 +50,11 @@ client.on("message", message => {
 			
 			https.get(url, (result) => {
 				if (result.statusCode !== 200) {
-					console.log("Failure: "+name+", "+realm);
 					message.channel.send("I can't seem to find "+name+" on "+realm+", <@"+userID+">. Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 				} else {
-					console.log("Success: "+name+", "+realm+", "+url);
 					newUsers.get(userID).set("name", name);
 					newUsers.get(userID).set("realm", realm);
-					message.channel.send(url+"\nIs this your character, <@"+userID+">?\nType __**Yes**__ or __**No**__.");
+					message.channel.send("Is this your character, <@"+userID+">?\nType __**Yes**__ or __**No**__.\n"+url);
 				}
 			});
 		}
