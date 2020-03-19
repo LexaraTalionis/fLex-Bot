@@ -30,8 +30,8 @@ client.on("message", message => {
 		
 		if (info.has("name") && info.has("realm")) {
 			if (message.content.startsWith("Yes")) {
-				message.member.setNickname(info.get("name")+"-"+info.get("realm"));
-				message.member.roles.set(["First Raid"]);
+				message.member.setNickname(info.get("name")+"-"+info.get("realm")).catch(e=>console.log(e));
+				message.member.roles.set(["First Raid"]).catch(e=>console.log(e));
 				message.channel.send("You're all set up, <@"+userID+">!");
 			} else if (message.content.startsWith("No")) {
 				newUsers.get(userID).delete("name");
