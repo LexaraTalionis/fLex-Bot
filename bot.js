@@ -6,7 +6,7 @@ const client = new Discord.Client();
 
 function parseName(str) {
 	var clean = str.trim().toLowerCase();
-	var words = clean.match("[a-z]");
+	var words = clean.match("[a-z]/g");
 	
 	console.log(clean, words);
 	
