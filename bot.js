@@ -20,16 +20,15 @@ client.on("message", message => {
 		return;
 	}
 	
-	var user = message.author;
-	var userID = user.id;
+	var userID = message.author.id;
 	
 	if (message.channel.type == "dm") {
 		var info = newUsers.get(userID);
 		
 		if (info.has("name") && info.has("realm")) {
 			if (message.content.startsWith("Yes")) {
-				user.setNickname(info.get("name")+"-"+info.get("realm"));
-				user.roles.set(["First Raid"]);
+				message.author.setNickname(info.get("name")+"-"+info.get("realm"));
+				message.author.roles.set(["First Raid"]);
 				message.author.send("You're all set up!");
 			} else if (message.content.startsWith("No")) {
 				newUsers.get(userID).delete("name");
