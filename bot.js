@@ -40,8 +40,8 @@ client.on("message", message => {
 	}
 	
 	var userID = message.author.id;
-	console.log("User ID: "+userID);
-	
+	console.log("User ID: "+userID+" ("+(typeof userID)+")");
+	/*
 	if (message.channel.type == "dm") {
 		if (typeof newUsers.get(userID).get(name) == 'string' && typeof newUsers.get(userID).get(realm) == 'string') {
 			if (message.content.startsWith("Yes")) {
@@ -70,7 +70,7 @@ client.on("message", message => {
 			newUsers.set(userID, new Map()) = {};
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 		}
-	}
+	}*/
 });
 
 client.login(process.env.BOT_TOKEN);
