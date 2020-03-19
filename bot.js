@@ -62,7 +62,7 @@ client.on("message", message => {
 		} else {
 			var url;
 			
-			name, realm, url = parseName(message.content).catch(e=>console.log("Parse Name: "+e));;
+			name, realm, url = parseName(message.content);
 			
 			https.get(url, (result) => {
 				if (result.statusCode !== 200) {
