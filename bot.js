@@ -7,16 +7,11 @@ const client = new Discord.Client();
 function parseName(str) {
 	var clean = str.trim().toLowerCase();
 	var words = clean.match(/[a-z]+/g);
-	
-	console.log(clean, words);
-	
 	var name = words[0];
 	words.shift();
 	var realm = words.join(" ");
 	var realmDash = words.join("-");
 	var url = wow+realmDash+"/"+name;
-	
-	console.log(name, realm, url);
 	
 	return name, realm, url;
 }
@@ -34,7 +29,7 @@ client.on("guildMemberAdd", member => {
 	
 	if (!channel) return;
 	
-	channel.send("Welcome to the Lex Raid Discord, <@"+userID+">! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
+	channel.send("Welcome to the Lex Raid Discord, <@"+member.id+">! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 });
 
 client.on("message", message => {
