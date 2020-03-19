@@ -10,9 +10,9 @@ client.on("ready", () => {
     console.log("Logged in as "+client.user.tag+"!");
 });
 
-client.on("guildMemberAdd", user => {
+client.on("guildMemberAdd", member => {
 	newUsers.set(user.id, new Map());
-	user.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
+	member.guild.channels.get("general").send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 });
 
 client.on("message", message => {
