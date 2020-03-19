@@ -30,7 +30,7 @@ client.on("ready", () => {
 });
 
 client.on("guildMemberAdd", user => {
-	newUsers.set(user.id, new Map()) = {};
+	newUsers.set(user.id, new Map());
 	user.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 });
 
@@ -68,7 +68,7 @@ client.on("message", message => {
 	} else {
 		if (message.content.startsWith("!new")) {
 			console.log(userID);
-			newUsers.set(userID, new Map()) = {};
+			newUsers.set(userID, new Map());
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 		}
 	}
