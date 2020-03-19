@@ -39,7 +39,7 @@ client.on("message", message => {
 				
 				message.channel.send("Let's try again, <@"+userID+">. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			} else {
-				message.channel.send("I'm sorry, <@"+userID+">, I don't understand. Is that your character? Type Yes or No.");
+				message.channel.send("I'm sorry, <@"+userID+">, I don't understand. Is that your character?\nType __**Yes**__ or __**No**__.");
 			}
 		} else {
 			var info = message.content.split("-");
@@ -56,7 +56,7 @@ client.on("message", message => {
 					console.log("Success: "+name+", "+realm+", "+url);
 					newUsers.get(userID).set("name", name);
 					newUsers.get(userID).set("realm", realm);
-					message.channel.send(url+"\nIs this your character, <@"+userID+">? Type Yes or No.");
+					message.channel.send(url+"\nIs this your character, <@"+userID+">?\nType __**Yes**__ or __**No**__.");
 				}
 			});
 		}
