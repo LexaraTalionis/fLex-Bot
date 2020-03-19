@@ -32,8 +32,8 @@ client.on("message", message => {
 				user.roles.set(["First Raid"]);
 				message.author.send("You're all set up!");
 			} else if (message.content.startsWith("No")) {
-				info.delete("name");
-				info.delete("realm");
+				newUsers.get(userID).delete("name");
+				newUsers.get(userID).delete("realm");
 				
 				message.author.send("Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			} else {
@@ -52,15 +52,14 @@ client.on("message", message => {
 					message.author.send("I can't seem to find "+name+" on "+realm+". Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 				} else {
 					console.log("Success: "+name+", "+realm+", "+url);
-					info.set("name", name);
-					info.set("realm", realm);
+					newUsers.get(userID).set("name", name);
+					newUsers.get(userID).set("realm", realm);
 					message.author.send(url+"\nIs this your character? Type Yes or No.");
 				}
 			});
 		}
 	} else {
 		if (message.content.startsWith("!new")) {
-			console.log(userID);
 			newUsers.set(userID, new Map());
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 		}
