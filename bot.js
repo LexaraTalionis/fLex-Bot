@@ -39,7 +39,7 @@ client.on("message", message => {
 			} else {
 				message.author.send("I'm sorry, I don't understand. Is that your character? Type Yes or No.");
 			}
-		} else {*/
+		} else {
 			var info = message.content.split("-");
 			var name = info[0];
 			var realm = info[1];
