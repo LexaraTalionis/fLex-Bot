@@ -12,8 +12,10 @@ function parseName(str) {
 	
 	https.get(url, (result) => {
 		if (result.statusCode !== 200) {
+			console.log("Failure: "+name+", "+realm);
 			return name, realm;
 		} else {
+			console.log("Success: "+name+", "+realm+", "+url);
 			return name, realm, url;
 		}
 	});
@@ -21,14 +23,14 @@ function parseName(str) {
 
 const client = new Discord.Client();
 
-var newUsers = {};
+var newUsers = new Map();
 
 client.on("ready", () => {
     console.log("Logged in as "+client.user.tag+"!");
 });
 
 client.on("guildMemberAdd", user => {
-	newUsers[user.id] = {};
+	newUsers.set(user.id, new Map()) = {};
 	user.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 });
 
@@ -41,12 +43,12 @@ client.on("message", message => {
 	console.log("User ID: "+userID);
 	
 	if (message.channel.type == "dm") {
-		if (typeof newUsers[userID].name == 'string' && typeof newUsers[userID].realm == 'string') {
+		if (typeof newUsers.get(userID).get(name) == 'string' && typeof newUsers.get(userID).get(realm) == 'string') {
 			if (message.content.startsWith("Yes")) {
 				
 			} else if (message.content.startsWith("No")) {
-				delete newUsers[userID].name;
-				delete newUsers[userID].realm;
+				delete newUsers.get(userID).delete(name);
+				delete newUsers.get(userID).delete(realm);
 				
 				message.author.send("Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			} else {
@@ -56,8 +58,8 @@ client.on("message", message => {
 			var name, realm, url = parseName(message.content);
 			
 			if (typeof url === "string") {
-				newUsers[userID].name = name;
-				newUsers[userID].realm = realm;
+				newUsers.get(userID).set("name", name);
+				newUsers.get(userID).set("realm", realm);
 				message.author.send(url+"\nIs this your character? Type Yes or No.");
 			} else {
 				message.author.send("I can't seem to find "+name+" on "+realm+". Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
@@ -65,7 +67,7 @@ client.on("message", message => {
 		}
 	} else {
 		if (message.content.startsWith("!new")) {
-			newUsers[userID] = {};
+			newUsers.set(userID, new Map()) = {};
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 		}
 	}
