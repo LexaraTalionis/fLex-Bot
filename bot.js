@@ -33,8 +33,13 @@ client.on("guildMemberAdd", user => {
 });
 
 client.on("message", message => {
+	if (message.author.bot) {
+		return;
+	}
+	
 	var userID = message.author.id;
 	console.log("User ID: "+userID);
+	
 	if (message.channel.type == "dm") {
 		if (typeof newUsers[userID].name == 'string' && typeof newUsers[userID].realm == 'string') {
 			if (message.content.startsWith("Yes")) {
@@ -58,7 +63,7 @@ client.on("message", message => {
 				message.author.send("I can't seem to find "+name+" on "+realm+". Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			}
 		}
-	} else if (!message.author.bot) {
+	} else {
 		if (message.content.startsWith("!new")) {
 			newUsers[userID] = {};
 			message.author.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
