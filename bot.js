@@ -54,7 +54,7 @@ client.on("message", message => {
 				message.author.send("I'm sorry, I don't understand. Is that your character? Type Yes or No.");
 			}
 		} else {*/
-			var name, realm, url = parseName(message.content);
+			var name, realm, url = await parseName(message.content);
 			console.log(name, realm, url);
 			/*
 			if (typeof url === "string") {
