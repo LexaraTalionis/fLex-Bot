@@ -11,7 +11,7 @@ client.on("ready", () => {
 });
 
 client.on("guildMemberAdd", member => {
-	newUsers.set(user.id, new Map());
+	newUsers.set(member.id, new Map());
 	
 	const channel = member.guild.channels.cache.find(ch => ch.name === "general");
 	
