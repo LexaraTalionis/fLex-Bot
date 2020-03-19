@@ -5,7 +5,11 @@ const wow = "https://worldofwarcraft.com/en-us/character/us/";
 const client = new Discord.Client();
 
 function parseName(str) {
-	var words = str.trim().toLowerCase().match("[a-z]");
+	var clean = str.trim().toLowerCase();
+	var words = clean.match("[a-z]");
+	
+	console.log(clean, words);
+	
 	var name = words[0];
 	words.shift();
 	var realm = words.join(" ");
