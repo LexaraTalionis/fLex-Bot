@@ -12,7 +12,12 @@ client.on("ready", () => {
 
 client.on("guildMemberAdd", member => {
 	newUsers.set(user.id, new Map());
-	member.guild.channels.get("general").send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
+	
+	const channel = member.guild.channels.cache.find(ch => ch.name === "general");
+	
+	if (!channel) return;
+	
+	channel.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 });
 
 client.on("message", message => {
