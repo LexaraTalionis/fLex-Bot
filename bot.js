@@ -4,6 +4,18 @@ const https = require("https");
 const wow = "https://worldofwarcraft.com/en-us/character/us/";
 const client = new Discord.Client();
 
+function parseName(str) {
+	var words = str.trim().toLowerCase().match("[a-z]");
+	var name = words.shift();
+	var realm = words.join(" ");
+	var realmDash = words.join("-");
+	var url = wow+realmDash+"/"+name;
+	
+	console.log(name, realm, url);
+	
+	return name, realm, url;
+}
+
 var newUsers = new Map();
 
 client.on("ready", () => {
@@ -17,7 +29,7 @@ client.on("guildMemberAdd", member => {
 	
 	if (!channel) return;
 	
-	channel.send("Welcome to the Lex Raid Discord! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
+	channel.send("Welcome to the Lex Raid Discord, <@"+userID+">! To access our Discord, please provide your character name and realm. IE: Lexara-Wyrmrest Accord");
 });
 
 client.on("message", message => {
@@ -47,11 +59,7 @@ client.on("message", message => {
 				message.channel.send("I'm sorry, <@"+userID+">, I don't understand. Is that your character?\nType __**Yes**__ or __**No**__.");
 			}
 		} else {
-			var info = message.content.split("-");
-			var name = info[0];
-			var realm = info[1];
-			var realmDash = realm.replace(" ", "-");
-			var url = wow+realmDash+"/"+name;
+			var name, realm, url = parseName(message.content);
 			
 			https.get(url, (result) => {
 				if (result.statusCode !== 200) {
