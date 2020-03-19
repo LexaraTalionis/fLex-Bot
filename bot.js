@@ -20,15 +20,20 @@ client.on("message", message => {
 		return;
 	}
 	
-	var userID = message.author.id;
+	var user = message.author;
+	var userID = user.id;
 	
 	if (message.channel.type == "dm") {
-		/*if (typeof newUsers.get(userID).get(name) == 'string' && typeof newUsers.get(userID).get(realm) == 'string') {
+		var info = newUsers.get(userID);
+		
+		if (info.has("name") && info.has("realm")) {
 			if (message.content.startsWith("Yes")) {
-				
+				user.setNickname(info.get("name")+"-"+info.get("realm"));
+				user.roles.set(["First Raid"]);
+				message.author.send("You're all set up!");
 			} else if (message.content.startsWith("No")) {
-				delete newUsers.get(userID).delete(name);
-				delete newUsers.get(userID).delete(realm);
+				info.delete("name");
+				info.delete("realm");
 				
 				message.author.send("Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 			} else {
@@ -47,12 +52,12 @@ client.on("message", message => {
 					message.author.send("I can't seem to find "+name+" on "+realm+". Let's try again. What is your character name and realm? IE: Lexara-Wyrmrest Accord");
 				} else {
 					console.log("Success: "+name+", "+realm+", "+url);
-					newUsers.get(userID).set("name", name);
-					newUsers.get(userID).set("realm", realm);
+					info.set("name", name);
+					info.set("realm", realm);
 					message.author.send(url+"\nIs this your character? Type Yes or No.");
 				}
 			});
-		//}
+		}
 	} else {
 		if (message.content.startsWith("!new")) {
 			console.log(userID);
