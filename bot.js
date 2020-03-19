@@ -3,7 +3,7 @@ const https = require("https");
 
 const wow = "https://worldofwarcraft.com/en-us/character/us/";
 
-function parseName(str) {
+var parseName = function(str) {
 	var info = str.split("-");
 	var name = info[0];
 	var realm = info[1];
