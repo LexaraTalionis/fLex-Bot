@@ -34,7 +34,7 @@ client.on("guildMemberAdd", user => {
 
 client.on("message", message => {
 	var userID = message.author.id;
-	
+	console.log("User ID: "+userID);
 	if (message.channel.type == "dm") {
 		if (typeof newUsers[userID].name == 'string' && typeof newUsers[userID].realm == 'string') {
 			if (message.content.startsWith("Yes")) {
