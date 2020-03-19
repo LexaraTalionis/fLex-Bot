@@ -7,11 +7,22 @@ const client = new Discord.Client();
 function parseName(str) {
 	var clean = str.trim().toLowerCase();
 	var words = clean.match(/[a-z]+/g);
+	
+	console.log(clean, words);
+	
 	var name = words[0];
 	words.shift();
+	
+	console.log(name);
+	
 	var realm = words.join(" ");
+	
+	console.log(realm);
+	
 	var realmDash = words.join("-");
 	var url = wow+realmDash+"/"+name;
+	
+	console.log(url);
 	
 	return name, realm, url;
 }
